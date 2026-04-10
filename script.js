@@ -480,8 +480,12 @@ function endJourneyFlurry() {
         audio.pause(); // Stop playlist
     }
     
-    const finaleAudio = new Audio('Arijit Singh another masterpiece=phir se  from dhurandhar movie has been released song#phirse.mp3');
-    finaleAudio.play().catch(e => console.log("Finale music blocked:", e));
+    const finaleAudio = new Audio('phirse.mp3');
+    finaleAudio.volume = 0.8;
+    finaleAudio.play().catch(e => {
+        console.log("Finale music blocked:", e);
+        // Fallback: Try to play it again after user interaction if possible
+    });
 
     let count = 0;
     const maxLetters = 5; // Reduced to 5 as requested
