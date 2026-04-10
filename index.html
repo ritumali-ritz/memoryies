@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Memories | A Story</title>
+    <link rel="stylesheet" href="style.css?v=1.1">
+    <!-- Google Fonts for premium typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=Playfair+Display:ital,wght@1,400;1,700&display=swap"
+        rel="stylesheet">
+</head>
+<div id="scroll-progress"></div>
+
+<body>
+    <!-- Intro Overlay -->
+    <div id="intro-overlay" class="overlay active">
+        <div class="intro-content">
+            <h3 class="intro-subtext">BCA BATCH 2023-26</h3>
+            <h1 class="glow-text">Beautiful Moments <br> of Ours</h1>
+            <p class="tap-hint">Tap to see our journey</p>
+        </div>
+    </div>
+
+    <!-- Center Navbar -->
+    <nav id="main-nav">
+        <div class="nav-links">
+            <a href="#" onclick="showSection('story')">Story</a>
+            <a href="#" onclick="showSection('students')">Students</a>
+            <a href="#" onclick="showSection('mentors')">Mentors</a>
+            <a href="#" onclick="showSection('moments')">Moments</a>
+        </div>
+    </nav>
+
+    <!-- Canvas for Cinematic Particles -->
+    <canvas id="particle-canvas"></canvas>
+
+    <!-- Main Story Container -->
+    <div id="story-container">
+        <!-- Progress Bar -->
+        <div class="progress-container">
+            <div id="progress-bar"></div>
+        </div>
+
+        <!-- Scene Container -->
+        <div id="scenes">
+            <!-- Scenes will be injected by JavaScript or handled by state -->
+            <div class="scene" id="scene-template">
+                <div class="media-container">
+                    <img src="" alt="Memory" class="scene-media">
+                    <div class="overlay-gradient"></div>
+                </div>
+                <div class="text-content">
+                    <p class="story-text"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Final Journey Section -->
+    <div id="final-section">
+        <div class="final-header">
+            <h1 class="final-title dev-trigger" onclick="showDeveloperProfile()">The End of an Era</h1>
+            <p class="final-subtitle">Batch 2023-2026</p>
+            <div class="final-details">
+                <p>2023-2026</p>
+                <p>(Final Year)</p>
+                <p>[ RRC Jath ]</p>
+            </div>
+        </div>
+
+        <!-- Legacy in Numbers Section -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <span class="stat-number">110+</span>
+                <span class="stat-label">Batchmates</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number">3</span>
+                <span class="stat-label">Years Shared</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number">500+</span>
+                <span class="stat-label">Chai Cups</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number">1</span>
+                <span class="stat-label">United Batch</span>
+            </div>
+        </div>
+
+        <!-- Student Search Bar -->
+        <div class="search-container">
+            <div class="search-wrapper">
+                <svg class="search-icon" viewBox="0 0 24 24">
+                    <path
+                        d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" />
+                </svg>
+                <input type="text" id="studentSearch" placeholder="Search for a name..." onkeyup="filterStudents()">
+            </div>
+            <div id="searchResults" class="search-results"></div>
+        </div>
+
+        <div class="marquee-container">
+            <div id="students-slider" class="marquee-content">
+                <!-- Students cards will be injected by JS -->
+            </div>
+        </div>
+
+        <button onclick="location.reload()" class="replay-btn">Relive the Journey</button>
+    </div>
+
+    <!-- Moments Info Section -->
+    <div id="moments-section" class="info-page">
+        <h2 class="section-title dev-trigger" onclick="showDeveloperProfile()">Precious Moments</h2>
+        <div class="moments-grid">
+            <div class="moment-item" onclick="showMomentDetail(this)">
+                <div class="moment-image-container">
+                    <img src="moments/first.jpg" alt="The Beginning" onerror="this.src='first.jpeg'">
+                </div>
+                <div class="moment-overlay">
+                    <div class="moment-info">
+                        <span class="moment-date">JULY 2023</span>
+                        <h3>The Beginning</h3>
+                        <p>Where it all started. First day of BCA, full of dreams and excitement.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="moment-item wide" onclick="showMomentDetail(this)">
+                <div class="moment-image-container">
+                    <img src="moments/bond.jpeg" alt="Friendships" onerror="this.src='image2.jpg'">
+                </div>
+                <div class="moment-overlay">
+                    <div class="moment-info">
+                        <span class="moment-date">2024</span>
+                        <h3>Events</h3>
+                        <p>Organizing events and making memories,we had great fun.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="moment-item" onclick="showMomentDetail(this)">
+                <div class="moment-image-container">
+                    <img src="moments/final.jpeg" alt="Final Year" onerror="this.src='image3.jpg'">
+                </div>
+                <div class="moment-overlay">
+                    <div class="moment-info">
+                        <span class="moment-date">FEB 2026</span>
+                        <h3>The Bittersweet Final Year</h3>
+                        <p>Realizing that time was moving too fast. Every "last" thing became precious.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="moment-item tall" onclick="showMomentDetail(this)">
+                <div class="moment-image-container">
+                    <img src="moments/trip.jpeg" alt="Memorable Trips" onerror="this.src='image4.jpg'">
+                </div>
+                <div class="moment-overlay">
+                    <div class="moment-info">
+                        <span class="moment-date">DEC 2025</span>
+                        <h3>The Unforgettable Tour</h3>
+                        <p>The long bus rides, the music, the laughs, and exploring new places together.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="moment-item" onclick="showMomentDetail(this)">
+                <div class="moment-image-container">
+                    <img src="moments/annual.jpeg" alt="College Events" onerror="this.src='image1.jpg'">
+                </div>
+                <div class="moment-overlay">
+                    <div class="moment-info">
+                        <span class="moment-date">Annual Day</span>
+                        <h3>Bright Lights & Loud Cheers</h3>
+                        <p>Showcasing our talents on stage. The fear, the thrill, and the applause.</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Additional Memories -->
+            <div class="moment-item wide" onclick="showMomentDetail(this)">
+                <div class="moment-image-container">
+                    <img src="moments/ai.jpeg" alt="Cultural Week" onerror="this.src='image2.jpg'">
+                </div>
+                <div class="moment-overlay">
+                    <div class="moment-info">
+                        <span class="moment-date">AI Debate</span>
+                        <h3> POV Crashes </h3>
+                        <p>The debate on AI was fun and we all enjoyed it.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="moment-item tall" onclick="showMomentDetail(this)">
+                <div class="moment-image-container">
+                    <img src="moments/sports.jpeg" alt="Sports Day" onerror="this.src='image4.jpg'">
+                </div>
+                <div class="moment-overlay">
+                    <div class="moment-info">
+                        <span class="moment-date">Sports Meet</span>
+                        <h3>Team Spirit & Victory</h3>
+                        <p>The sweat, the competition, and the joy of winning together.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="moment-item tall" onclick="showMomentDetail(this)">
+                <div class="moment-image-container">
+                    <img src="moments/nss.jpeg" alt="NSS" onerror="this.src='image4.jpg'">
+                </div>
+                <div class="moment-overlay">
+                    <div class="moment-info">
+                        <span class="moment-date">NSS</span>
+                        <h3>The NSS Skips</h3>
+                        <p>The Skipping of the NSS workings😄</p>
+                    </div>
+                </div>
+            </div>
+            <div class="moment-item" onclick="showMomentDetail(this)">
+                <div class="moment-image-container">
+                    <img src="moments/chai.png" alt="Canteen Moments" onerror="this.src='image1.jpg'">
+                </div>
+                <div class="moment-overlay">
+                    <div class="moment-info">
+                        <span class="moment-date">Canteen Diaries</span>
+                        <h3>Laughter Over Chai</h3>
+                        <p>Where most of our memories were made. From deep talks to silly jokes.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="moment-item wide" onclick="showMomentDetail(this)">
+                <div class="moment-image-container">
+                    <img src="moments/lab masti.jpeg" alt="Lab Masti" onerror="this.src='image2.jpg'">
+                </div>
+                <div class="moment-overlay">
+                    <div class="moment-info">
+                        <span class="moment-date">Lab Masti</span>
+                        <h3>Lab Masti</h3>
+                        <p>Lab masti and fun with friends, College life</p>
+                    </div>
+                </div>
+            </div>
+            <div class="moment-item wide" onclick="showMomentDetail(this)">
+                <div class="moment-image-container">
+                    <img src="moments/grp.jpeg" alt="Lab Masti" onerror="this.src='image2.jpg'">
+                </div>
+                <div class="moment-overlay">
+                    <div class="moment-info">
+                        <span class="moment-date">Group photos</span>
+                        <h3>Group photos</h3>
+                        <p>Group photos and fun with friends, College life</p>
+                    </div>
+                </div>
+            </div>
+            <!-- More Memories added for a full gallery -->
+            <div class="moment-item" onclick="showMomentDetail(this)">
+                <div class="moment-image-container">
+                    <img src="moments/project.jpeg" alt="Exam Prep"
+                        onerror="this.src='https://images.unsplash.com/photo-1434030216411-0b793f4b4173?q=80&w=2070&auto=format&fit=crop'">
+                </div>
+                <div class="moment-overlay">
+                    <div class="moment-info">
+                        <span class="moment-date">Project Submissons</span>
+                        <h3>The Projecttt</h3>
+                        <p>The Files The eroros the font the prints all this becomes toghter a Projecttt</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        </div>
+    </div>
+
+    <!-- Legacy Signature Wall -->
+    <div id="legacy-wall" class="info-page">
+        <h2 class="section-title">OUR COLLECTIVE LEGACY</h2>
+        <div class="signature-container" id="signature-wall">
+            <!-- Names will be injected here as signatures -->
+        </div>
+    </div>
+
+    <!-- Mentors Section (New) -->
+    <div id="mentors-section" class="info-page">
+        <h2 class="section-title dev-trigger" onclick="showDeveloperProfile()">Faculty Mentors</h2>
+        <div class="mentors-grid">
+            <div class="mentor-card">
+                <div class="mentor-photo">
+                    <img src="mentors/hod.png" alt="HOD"
+                        onerror="this.onerror=null; this.src='https://www.w3schools.com/howto/img_avatar.png';">
+                </div>
+                <div class="mentor-title">Head of Department</div>
+                <div class="mentor-name">Prof.P.D.MALI.</div>
+            </div>
+            <div class="mentor-card">
+                <div class="mentor-photo">
+                    <img src="mentors/khdatare.png" alt="Prof. Khadatare"
+                        onerror="this.onerror=null; this.src='https://www.w3schools.com/howto/img_avatar.png';">
+                </div>
+                <div class="mentor-title">Class Coordinator</div>
+                <div class="mentor-name">Prof.R.S.KHADATARE</div>
+            </div>
+            <div class="mentor-card">
+                <div class="mentor-photo">
+                    <img src="mentors/madam.png" alt="Prof. Balikai"
+                        onerror="this.onerror=null; this.src='https://www.w3schools.com/howto/img_avatar.png';">
+                </div>
+                <div class="mentor-title">Faculty Member</div>
+                <div class="mentor-name">Prof.J.S.BALIKAI</div>
+            </div>
+            <div class="mentor-card">
+                <div class="mentor-photo">
+                    <img src="mentors/surve.png" alt="Prof. Surve"
+                        onerror="this.onerror=null; this.src='https://www.w3schools.com/howto/img_avatar.png';">
+                </div>
+                <div class="mentor-title">Faculty Member</div>
+                <div class="mentor-name">Prof.V.A.SURVE</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Music Control -->
+    <button id="music-toggle" class="music-btn" onclick="toggleMusic()">
+        <svg id="music-icon" viewBox="0 0 24 24">
+            <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z" />
+        </svg>
+    </button>
+
+    <!-- Final Message Section (New) -->
+    <div id="message-section" class="info-page">
+        <div class="final-quote-section">
+            <h2 class="big-quote">"Don’t be dismayed at goodbyes. A farewell is necessary before you can meet
+                again."
+            </h2>
+            <p style="opacity: 0.6; letter-spacing: 0.4rem;">RICHARD BACH</p>
+            <button onclick="location.reload()" class="replay-btn" style="margin-top: 5rem;">Start Over</button>
+        </div>
+    </div>
+
+    <!-- Modal for detailed views -->
+    <div id="infoModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="hideModal()">&times;</span>
+            <div id="studentProfileContent"></div>
+        </div>
+    </div>
+
+    <!-- Modal for Moments Details -->
+    <div id="momentModal" class="modal">
+        <div class="modal-content moment-modal-content">
+            <span class="close-modal" onclick="closeMomentModal()">&times;</span>
+            <div class="moment-detail-view">
+                <div class="moment-detail-image">
+                    <img id="detail-img" src="" alt="Moment">
+                </div>
+                <div class="moment-detail-info">
+                    <span id="detail-date" class="moment-date"></span>
+                    <h2 id="detail-title"></h2>
+                    <p id="detail-desc"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Developer Profile Modal -->
+    <div id="devModal" class="modal">
+        <div class="modal-content dev-modal-content">
+            <span class="close-modal" onclick="closeDevModal()">&times;</span>
+            <div class="dev-profile">
+                <div class="dev-photo">
+                    <img src="developer.png" alt="Developer"
+                        onerror="this.src='https://i.ibb.co/vzK8J5t/photo-1535713875002-d1d0cf377fde-ixlib-rb-4-0.jpg'">
+                </div>
+                <div class="dev-info">
+                    <h3>Developed by</h3>
+                    <h2>Ritesh Mali</h2>
+                    <a href="https://instagram.com/ritesh_mali514" target="_blank" class="insta-link">
+                        <svg class="insta-icon" viewBox="0 0 24 24">
+                            <path
+                                d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.266.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z">
+                            </path>
+                        </svg>
+                        <span>@ritesh_mali514</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Background Audio -->
+    <audio id="bg-audio" loop>
+        <source src="Yaariyaan.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Custom Cursor -->
+    <div class="custom-cursor"></div>
+    <div class="cursor-follower"></div>
+
+    <!-- Background Canvas -->
+    <canvas id="bg-particles"></canvas>
+
+    <script src="script.js?v=1.2"></script>
+</body>
+
+</html>
