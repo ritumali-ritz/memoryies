@@ -1470,80 +1470,113 @@ body {
     }
 }
 
-/* Magic Letter Animation */
+/* Magic Letter Animation - Premium Version */
 .envelope-container {
     position: fixed;
     z-index: 10000;
-    width: 280px;
+    width: 300px;
     pointer-events: none;
-    perspective: 1000px;
-    transition: opacity 1s ease;
+    perspective: 1500px;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: -200px;
 }
 
 .envelope {
     position: relative;
     width: 100%;
     height: 180px;
-    background: #222;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 4px;
-    box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+    background: #1a1a1a;
+    border: 1.5px solid rgba(255, 215, 0, 0.2);
+    border-radius: 8px;
+    box-shadow: 0 25px 50px rgba(0,0,0,0.6);
     transform-style: preserve-3d;
-    transition: transform 0.8s ease;
+}
+
+/* Wax Seal */
+.envelope::after {
+    content: '★';
+    position: absolute;
+    top: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 40px;
+    background: #8b0000;
+    border-radius: 50%;
+    color: #ffd700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5), inset 0 0 5px rgba(255,255,255,0.2);
+    z-index: 15;
+    transition: transform 0.5s ease 0.3s, opacity 0.5s ease 0.3s;
+}
+
+.envelope-container.active .envelope::after {
+    transform: translateX(-50%) scale(1.5) rotate(15deg);
+    opacity: 0;
 }
 
 .envelope::before {
     content: '';
     position: absolute;
     top: 0;
+    left: 0;
     width: 0;
     height: 0;
-    border-left: 140px solid transparent;
-    border-right: 140px solid transparent;
-    border-top: 100px solid #333;
+    border-left: 150px solid transparent;
+    border-right: 150px solid transparent;
+    border-top: 100px solid #2a2a2a;
     z-index: 10;
     transform-origin: top;
-    transition: transform 0.5s ease 0.5s;
+    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.5s;
+    filter: drop-shadow(0 5px 5px rgba(0,0,0,0.4));
 }
 
 .envelope-container.active .envelope::before {
-    transform: rotateX(180deg);
+    transform: rotateX(160deg);
 }
 
 .letter-paper {
     position: absolute;
-    top: 10px;
-    left: 10px;
-    right: 10px;
-    bottom: 10px;
-    background: #fff;
-    color: #000;
-    padding: 20px;
+    top: 15px;
+    left: 15px;
+    right: 15px;
+    bottom: 15px;
+    background: #fdfcf0; /* Parchment color */
+    color: #2c3e50;
+    padding: 30px 20px;
     font-family: 'Outfit', sans-serif;
-    font-size: 0.9rem;
-    line-height: 1.5;
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.6;
     border-radius: 2px;
     z-index: 5;
     transform: translateY(0);
-    transition: transform 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) 1s;
+    transition: transform 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) 0.8s;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
-    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    background-image: linear-gradient(rgba(0,0,0,0.03) 1px, transparent 1px);
+    background-size: 100% 1.5rem;
 }
 
 .envelope-container.active .letter-paper {
-    transform: translateY(-120px) scale(1.05);
+    transform: translateY(-180px) scale(1.1); /* Slid out much further */
+    z-index: 20; /* Come to front of the lid */
 }
 
-@keyframes letterFloat {
-    0% { transform: translateY(100vh) rotate(5deg); opacity: 0; }
-    20% { opacity: 1; }
-    80% { opacity: 1; }
-    100% { transform: translateY(-100vh) rotate(-5deg); opacity: 0; }
+@keyframes letterFloatSequence {
+    0% { transform: translate(-50%, 0) scale(0.5); opacity: 0; }
+    15% { transform: translate(-50%, -300px) scale(1); opacity: 1; }
+    85% { transform: translate(-50%, -350px) scale(1); opacity: 1; }
+    100% { transform: translate(-50%, -600px) scale(0.8); opacity: 0; }
 }
 
 .envelope-container {
-    animation: letterFloat 12s linear forwards;
+    animation: letterFloatSequence 10s ease-in-out forwards;
 }

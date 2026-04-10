@@ -451,8 +451,8 @@ function createMagicLetter() {
     const container = document.createElement('div');
     container.className = 'envelope-container';
     
-    // Random horizontal position
-    container.style.left = Math.random() * 60 + 20 + '%';
+    // Random horizontal position, but keep it within screen bounds
+    container.style.left = Math.random() * 60 + 20 + '%'; 
     
     container.innerHTML = `
         <div class="envelope">
@@ -470,31 +470,40 @@ function createMagicLetter() {
     }, 2000);
     
     // Remove after it floats off screen
-    setTimeout(() => container.remove(), 12000);
+    setTimeout(() => container.remove(), 10000);
 }
 
 function endJourneyFlurry() {
+    // 1. Play the new finale song
+    const audio = document.getElementById('bg-audio');
+    if (audio) {
+        audio.pause(); // Stop playlist
+    }
+    
+    const finaleAudio = new Audio('Arijit Singh another masterpiece=phir se  from dhurandhar movie has been released song#phirse.mp3');
+    finaleAudio.play().catch(e => console.log("Finale music blocked:", e));
+
     let count = 0;
-    const maxLetters = 15;
+    const maxLetters = 5; // Reduced to 5 as requested
     
     // First immediate letter
-    createMagicLetter();
+    setTimeout(createMagicLetter, 500);
     count++;
     
     const letterInterval = setInterval(() => {
-        createMagicLetter();
-        count++;
-        
         if (count >= maxLetters) {
             clearInterval(letterInterval);
             
-            // Final transition after the last few letters are still visible
+            // Final transition after letters finish
             setTimeout(() => {
                 showSection('message-section');
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             }, 8000);
+            return;
         }
-    }, 5000); // 5 second gap as requested
+        createMagicLetter();
+        count++;
+    }, 4500); 
 }
 
 const playlist = [
