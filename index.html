@@ -69,7 +69,6 @@
                 <p>2023-2026</p>
                 <p>(Final Year)</p>
                 <p>[ RRC Jath ]</p>
-                <p>Scroll Down TO see</p>
             </div>
         </div>
 
@@ -105,9 +104,16 @@
             <div id="searchResults" class="search-results"></div>
         </div>
 
-        <div class="marquee-container">
-            <div id="students-slider" class="marquee-content">
-                <!-- Students cards will be injected by JS -->
+        <div class="students-section">
+            <h2 class="section-title">The Batchmates</h2>
+
+            <div class="filter-container">
+                <button class="filter-btn active">All Batch</button>
+
+            </div>
+
+            <div id="students-grid" class="students-grid">
+                <!-- Student cards will be injected by JS -->
             </div>
         </div>
 
@@ -252,6 +258,18 @@
                     </div>
                 </div>
             </div>
+            <div class="moment-item wide" onclick="showMomentDetail(this)">
+                <div class="moment-image-container">
+                    <img src="moments/birthday.jpeg" alt="Birthday Of Hod" onerror="this.src='image2.jpg'">
+                </div>
+                <div class="moment-overlay">
+                    <div class="moment-info">
+                        <span class="moment-date">HOD Birthday</span>
+                        <h3>HOD Birthday Celebration</h3>
+                        <p>The Birthday Celebration of the Hod 😊😎</p>
+                    </div>
+                </div>
+            </div>
             <!-- More Memories added for a full gallery -->
             <div class="moment-item" onclick="showMomentDetail(this)">
                 <div class="moment-image-container">
@@ -267,8 +285,8 @@
                 </div>
             </div>
         </div>
-    </div>
-
+        <div style="text-align: center; margin-top: 4rem;">
+            <button onclick="endJourneyFlurry()" class="replay-btn">End the Beautiful Journey By clicking here </button>
         </div>
     </div>
 
@@ -350,6 +368,7 @@
         <div class="modal-content moment-modal-content">
             <span class="close-modal" onclick="closeMomentModal()">&times;</span>
             <div class="moment-detail-view">
+                <div class="nav-arrow prev-arrow" onclick="navMoment(-1)">&#10094;</div>
                 <div class="moment-detail-image">
                     <img id="detail-img" src="" alt="Moment">
                 </div>
@@ -358,6 +377,7 @@
                     <h2 id="detail-title"></h2>
                     <p id="detail-desc"></p>
                 </div>
+                <div class="nav-arrow next-arrow" onclick="navMoment(1)">&#10095;</div>
             </div>
         </div>
     </div>
@@ -388,8 +408,8 @@
     </div>
 
     <!-- Background Audio -->
-    <audio id="bg-audio" loop>
-        <source src="Yaariyaan.mp3" type="audio/mpeg">
+    <audio id="bg-audio">
+        <source src="Wo din bhi kya din thearijit Singh black screen WhatsApp status.mp3" type="audio/mpeg">
     </audio>
 
     <!-- Custom Cursor -->

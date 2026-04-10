@@ -15,6 +15,16 @@ const students = [
     "Anuradha Gadade", "Avdhut Tile", "Dhaneshwari Bagali", "Laxman Pujari", "Aniket Masal", "Maruti Chavan", "Asha Kumbhar", "Sneha Kumbhar", "Farahat Halli", "Prashant Shitole", "Abhijit Sawant", "Prasad Swami", "Anushri Arali", "Dhanuja Kolekar", "Kajma Makandar", "Anuja Kolekar", "Samruddhi Modi", "Prajakta Mali", "Shreya Biradar", "Sanket Khot", "Sandeep Sawant", "Vaishnavi Patil", "Shubhangi Shinde", "Shraddha Pore", "Anant Pore", "Ashwini Mali", "Sauranjali Langote", "Anuradha Jadhav", "Akshrao Bhosale", "Ritesh Mali", "Rutuja Devkate", "Sajid Pinjari", "Shridevi Ghejji", "Amol Kottalagi", "Vijaylaxmi Jabagond", "Payal Walikar", "Rohit Kadam", "Shweta Shant", "Manjunath Teli", "Rohini Walekhinde", "Laxman Chaugule", "Atharv Swami", "Mahantesh Mali", "Mallikarjun Shegunashi", "Shashikant Mali", "Gurubasu Jaygond", "Ashwat Birajadar", "Sonali Mali", "Priya Sawant", "Alip Kamate", "Shivraj Shinde", "Monu Wade", "Pratiksha Mane", "Sanika Chavan", "Payal Mane", "Saundarya Sankpal", "Sushmita Chavan", "Aditya Sargar", "Rani Kare", "Shravani Purohit", "Vrushali Mane", "Prajwal Khandekar", "Pratik Mali", "Savitri Karajanagi", "Akshata Kamble", "Mahesh Karoli", "Aniket Bhosale", "Sneha Karenavar", "Sonali Madane", "Sushant Shingade", "Rubina Makandar", "Harsh Chendake", "Sahil Kore", "Satish Doni", "Mahesh Algundagi", "Gitanjali Mali", "Supriya Mane Patil", "Madhura Tangadi", "Shital Patil", "Harshada Pawar", "Ashwat Bijjargi", "Kiran Pawar", "Sujal Babar", "Sagar Savant", "Prajakta Ingavale", "Tejashri More", "Sajid Mulla", "Pahel Nadaf", "Sana Nadaf", "Sahebrao Devkate", "Maruti Sargar", "Sakshi Waghmode", "Pratik Khandekar", "Dhanashri Shinde", "Rukmini Tile", "Praniti Shirke", "Harshvardhan Shant", "Priyanka Shinde", "Rakshita Biradar", "Shivam Mali", "Mayuri Sawant", "Yash Buva", "Aasifa Nadaf", "Dhanashri Marathe", "Aishwarya Chougule", "Pranav Lokare", "Awaij Mujawar", "Anita Sangolkar", "Bhagyashri Mali", "Soumya Karoli", "Radha Yadagond", "Kavasar Shaikh", "Nirjala Bamane", "Ayesha Makandar", "Akshay Chavan", "Prashant Pawar"
 ];
 
+const floatingQuotes = [
+    "End of an Era...", "BCA 2023-26 forever!", "Coffee, Code, and Memories.", 
+    "The journey was the reward.", "See you on the other side!", "One team, One dream.", 
+    "Late nights, Great heights.", "Miss those lab sessions...", "Chai breaks > Classes", 
+    "Don't cry because it's over, smile because it happened.", "A journey of a thousand miles...", 
+    "Memories are timeless treasures.", "Batch of '26: The Legends.", 
+    "Started with a 'Hello', ended with a 'See you later'.", "Infinite memories...", 
+    "We didn't realize we were making memories...", "Backbenchers rules!"
+];
+
 // DOM Elements
 const introOverlay = document.getElementById('intro-overlay');
 const storyContainer = document.getElementById('story-container');
@@ -25,10 +35,10 @@ const finalSection = document.getElementById('final-section');
 const momentsSection = document.getElementById('moments-section');
 const mentorsSection = document.getElementById('mentors-section');
 const messageSection = document.getElementById('message-section');
-const studentsSlider = document.getElementById('students-slider');
+const studentsGrid = document.getElementById('students-grid');
 const mainNav = document.getElementById('main-nav');
 const infoModal = document.getElementById('infoModal');
-const modalBody = document.getElementById('modal-body');
+const modalBody = document.getElementById('studentProfileContent');
 
 let currentSceneIndex = 0;
 let isStarted = false;
@@ -48,14 +58,12 @@ function init() {
     });
 
     // Generate student cards
-    students.forEach(name => {
-        studentsSlider.appendChild(createStudentCard(name));
-    });
-
-    // Mirror for infinite scroll
-    students.forEach(name => {
-        studentsSlider.appendChild(createStudentCard(name));
-    });
+    if (studentsGrid) {
+        studentsGrid.innerHTML = '';
+        students.forEach(name => {
+            studentsGrid.appendChild(createStudentCard(name));
+        });
+    }
 
     introOverlay.addEventListener('click', startStory);
 }
@@ -64,9 +72,20 @@ function createStudentCard(name) {
     const card = document.createElement('div');
     card.className = 'student-card';
     const initial = name.charAt(0);
+    const photoPath = `students/${name}.jpg`;
+    
     card.innerHTML = `
-        <div class="card-initial">${initial}</div>
-        <div class="card-name">${name}</div>
+        <div class="card-image">
+            <img src="${photoPath}" alt="${name}" loading="lazy" 
+                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="card-initial-fallback" style="display:none;">${initial}</div>
+        </div>
+        <div class="card-overlay">
+            <div class="student-info">
+                <span class="batch-tag">BCA '26</span>
+                <h3 class="card-name">${name}</h3>
+            </div>
+        </div>
     `;
     card.onclick = () => showStudentProfile(name);
     return card;
@@ -111,7 +130,8 @@ function startStory() {
     // Play Background Audio
     const audio = document.getElementById('bg-audio');
     if (audio) {
-        audio.play().catch(e => console.log("Audio play failed:", e));
+        // Ensure the playlist limit is set up and starts playing
+        toggleMusic();
     }
 
     introOverlay.style.opacity = '0';
@@ -174,6 +194,8 @@ function showSection(sectionId) {
         momentsSection.classList.add('active');
     } else if (sectionId === 'mentors') {
         mentorsSection.classList.add('active');
+    } else if (sectionId === 'message-section') {
+        if (messageSection) messageSection.classList.add('active');
     }
 }
 
@@ -272,24 +294,82 @@ function animateStats() {
 }
 
 // Moments Gallery Detail Logic
+let currentMomentIndex = 0;
+const allMoments = [];
+
 function showMomentDetail(element) {
+    // Populate allMoments if empty
+    if (allMoments.length === 0) {
+        document.querySelectorAll('.moment-item').forEach((item, index) => {
+            allMoments.push({
+                img: item.querySelector('img').src,
+                date: item.querySelector('.moment-date').textContent,
+                title: item.querySelector('h3').textContent,
+                desc: item.querySelector('p').textContent,
+                element: item
+            });
+        });
+    }
+
+    // Find current index
+    const clickedImg = element.querySelector('img').src;
+    currentMomentIndex = allMoments.findIndex(m => m.img === clickedImg);
+
+    updateMomentModal();
+    document.getElementById('momentModal').style.display = 'flex';
+}
+
+function updateMomentModal() {
+    const moment = allMoments[currentMomentIndex];
     const modal = document.getElementById('momentModal');
-    const img = element.querySelector('img').src;
-    const date = element.querySelector('.moment-date').textContent;
-    const title = element.querySelector('h3').textContent;
-    const desc = element.querySelector('p').textContent;
+    
+    // Add fade-out/in effect
+    const content = modal.querySelector('.moment-detail-view');
+    content.style.opacity = '0';
+    content.style.transform = 'scale(0.95)';
 
-    document.getElementById('detail-img').src = img;
-    document.getElementById('detail-date').textContent = date;
-    document.getElementById('detail-title').textContent = title;
-    document.getElementById('detail-desc').textContent = desc;
+    setTimeout(() => {
+        document.getElementById('detail-img').src = moment.img;
+        document.getElementById('detail-date').textContent = moment.date;
+        document.getElementById('detail-title').textContent = moment.title;
+        document.getElementById('detail-desc').textContent = moment.desc;
+        
+        content.style.opacity = '1';
+        content.style.transform = 'scale(1)';
+    }, 200);
+}
 
-    modal.style.display = 'flex';
+function navMoment(step) {
+    currentMomentIndex += step;
+    if (currentMomentIndex < 0) currentMomentIndex = allMoments.length - 1;
+    if (currentMomentIndex >= allMoments.length) currentMomentIndex = 0;
+    updateMomentModal();
 }
 
 function closeMomentModal() {
     document.getElementById('momentModal').style.display = 'none';
 }
+
+// 3D Tilt Effect
+function initMomentTilt() {
+    document.querySelectorAll('.moment-item').forEach(item => {
+        item.addEventListener('mousemove', e => {
+            const { left, top, width, height } = item.getBoundingClientRect();
+            const x = (e.clientX - left) / width - 0.5;
+            const y = (e.clientY - top) / height - 0.5;
+            
+            const tiltX = y * 10; // Max tilt 10deg
+            const tiltY = -x * 10;
+            
+            item.style.transform = `perspective(1000px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) scale(0.98)`;
+        });
+        
+        item.addEventListener('mouseleave', () => {
+            item.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)`;
+        });
+    });
+}
+window.addEventListener('load', initMomentTilt);
 
 function hideModal() {
     document.getElementById('infoModal').style.display = 'none';
@@ -345,22 +425,118 @@ function filterStudents() {
     }
 }
 
-// Close search on Escape key
+// Close search or modal on Escape key, Nav on Arrows
 document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
+        const momentsModal = document.getElementById('momentModal');
+        if (momentsModal && momentsModal.style.display === 'flex') closeMomentModal();
+        
         const results = document.getElementById('searchResults');
         if (results) results.style.display = 'none';
+        
         const searchInput = document.getElementById('studentSearch');
         if (searchInput) searchInput.value = '';
     }
+    
+    // Gallery Navigation
+    const momentsModal = document.getElementById('momentModal');
+    if (momentsModal && momentsModal.style.display === 'flex') {
+        if (e.key === 'ArrowRight') navMoment(1);
+        if (e.key === 'ArrowLeft') navMoment(-1);
+    }
 });
+
+function createMagicLetter() {
+    const quote = floatingQuotes[Math.floor(Math.random() * floatingQuotes.length)];
+    const container = document.createElement('div');
+    container.className = 'envelope-container';
+    
+    // Random horizontal position
+    container.style.left = Math.random() * 60 + 20 + '%';
+    
+    container.innerHTML = `
+        <div class="envelope">
+            <div class="letter-paper">
+                <p>${quote}</p>
+            </div>
+        </div>
+    `;
+    
+    document.body.appendChild(container);
+    
+    // Trigger the "opening" after it starts floating
+    setTimeout(() => {
+        container.classList.add('active');
+    }, 2000);
+    
+    // Remove after it floats off screen
+    setTimeout(() => container.remove(), 12000);
+}
+
+function endJourneyFlurry() {
+    let count = 0;
+    const maxLetters = 15;
+    
+    // First immediate letter
+    createMagicLetter();
+    count++;
+    
+    const letterInterval = setInterval(() => {
+        createMagicLetter();
+        count++;
+        
+        if (count >= maxLetters) {
+            clearInterval(letterInterval);
+            
+            // Final transition after the last few letters are still visible
+            setTimeout(() => {
+                showSection('message-section');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }, 8000);
+        }
+    }, 5000); // 5 second gap as requested
+}
+
+const playlist = [
+    "Wo din bhi kya din thearijit Singh black screen WhatsApp status.mp3",
+    "second song.mp3",
+    "Third song.mp3"
+];
+let currentTrackIndex = 0;
 
 function toggleMusic() {
     const audio = document.getElementById('bg-audio');
     const btn = document.getElementById('music-toggle');
+    
+    if (!audio) return;
+
+    // Initialize playlist listener if not already there
+    if (!audio.hasAttribute('data-limit-set')) {
+        audio.setAttribute('data-limit-set', 'true');
+        audio.addEventListener('ended', () => {
+            currentTrackIndex++;
+            if (currentTrackIndex < playlist.length) {
+                audio.src = playlist[currentTrackIndex];
+                audio.load();
+                audio.play().catch(console.error);
+                btn.classList.remove('muted');
+            } else {
+                audio.pause();
+                btn.classList.add('muted');
+            }
+        });
+    }
+
     if (audio.paused) {
-        audio.play().catch(e => console.log("Audio play failed on toggle:", e));
-        btn.classList.remove('muted');
+        // Only play if we haven't finished the playlist
+        if (currentTrackIndex < playlist.length) {
+            // If src is empty (first time), set it
+            if (!audio.src || audio.src === "") {
+                audio.src = playlist[currentTrackIndex];
+            }
+            audio.play().catch(e => console.log("Manual play failed:", e));
+            btn.classList.remove('muted');
+        }
     } else {
         audio.pause();
         btn.classList.add('muted');
@@ -439,9 +615,31 @@ function addMusicPulse() {
     }
 }
 
-// Update startStory to include pulse
+function createFloatingMessage() {
+    const quote = floatingQuotes[Math.floor(Math.random() * floatingQuotes.length)];
+    const msg = document.createElement('div');
+    msg.className = 'floating-message';
+    msg.textContent = quote;
+    
+    // Random position
+    msg.style.left = Math.random() * 80 + 10 + '%';
+    msg.style.top = Math.random() * 80 + 10 + '%';
+    
+    document.body.appendChild(msg);
+    
+    // Remove after animation
+    setTimeout(() => msg.remove(), 15000);
+}
+
+// Start floating messages only after intro is cleared
+function initFloatingMessages() {
+    setInterval(createFloatingMessage, 4000);
+}
+
+// Update startStory to include floating messages
 const originalStartStory = startStory;
 startStory = function() {
     originalStartStory();
     addMusicPulse();
+    initFloatingMessages();
 };
