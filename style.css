@@ -895,6 +895,14 @@ body {
     fill: #fff;
 }
 
+.insta-status {
+    margin-top: 10px;
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.6);
+    font-weight: 300;
+    letter-spacing: 0.05rem;
+}
+
 .student-profile-details h3 {
     font-size: 0.7rem;
     /* Reduced from 0.8rem */

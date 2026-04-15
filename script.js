@@ -236,7 +236,10 @@ function showStudentProfile(name) {
                             </svg>
                             <span>@${studentSocials[name]}</span>
                         </a>
-                    ` : `<span>❤️ Memory Captured</span>`}
+                        <p class="insta-status">BCA 2023-26 Forever! ❤️</p>
+                    ` : `
+                        <p class="insta-status">Stay Connected, Stay Legendary! ❤️</p>
+                    `}
                 </div>
             </div>
         </div>
