@@ -40,11 +40,6 @@
 
     <!-- Main Story Container -->
     <div id="story-container">
-        <!-- Progress Bar -->
-        <div class="progress-container">
-            <div id="progress-bar"></div>
-        </div>
-
         <!-- Scene Container -->
         <div id="scenes">
             <!-- Scenes will be injected by JavaScript or handled by state -->
@@ -353,6 +348,9 @@
 
     <!-- Music Control -->
     <button id="music-toggle" class="music-btn" onclick="toggleMusic()">
+        <svg class="progress-ring">
+            <circle class="progress-ring__circle" cx="30" cy="30" r="28" />
+        </svg>
         <svg id="music-icon" viewBox="0 0 24 24">
             <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z" />
         </svg>

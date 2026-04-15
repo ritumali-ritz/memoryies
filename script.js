@@ -16,21 +16,140 @@ const students = [
 ];
 
 const floatingQuotes = [
-    "End of an Era...", "BCA 2023-26 forever!", "Coffee, Code, and Memories.", 
-    "The journey was the reward.", "See you on the other side!", "One team, One dream.", 
-    "Late nights, Great heights.", "Miss those lab sessions...", "Chai breaks > Classes", 
-    "Don't cry because it's over, smile because it happened.", "A journey of a thousand miles...", 
-    "Memories are timeless treasures.", "Batch of '26: The Legends.", 
-    "Started with a 'Hello', ended with a 'See you later'.", "Infinite memories...", 
+    "End of an Era...", "BCA 2023-26 forever!", "Coffee, Code, and Memories.",
+    "The journey was the reward.", "See you on the other side!", "One team, One dream.",
+    "Late nights, Great heights.", "Miss those lab sessions...", "Chai breaks > Classes",
+    "Don't cry because it's over, smile because it happened.", "A journey of a thousand miles...",
+    "Memories are timeless treasures.", "Batch of '26: The Legends.",
+    "Started with a 'Hello', ended with a 'See you later'.", "Infinite memories...",
     "We didn't realize we were making memories...", "Backbenchers rules!"
 ];
+
+// 1. Instagram Mapping for Students
+// Just add "Full Name": "Instagram_ID" here
+const studentSocials = {
+    "Aasifa Nadaf": "",
+    "Abhijit Sawant": "abhi_sawant_8788",
+    "Aditya Sargar": "aditya_sargar_007",
+    "Aishwarya Chougule": "aishu_chougule12",
+    "Akshata Kamble": "",
+    "Akshay Chavan": "aksha_y07.x",
+    "Akshrao Bhosale": "ab_291137",
+    "Alip Kamate": "_justtt.alif",
+    "Amol Kottalagi": "kottalagiamol_45",
+    "Anant Pore": "anant_0879",
+    "Aniket Bhosale": "aniket_bhosale2005",
+    "Aniket Masal": "iamaniket_01",
+    "Anita Sangolkar": "",
+    "Anuja Kolekar": "a_n_u_j_a___40",
+    "Anuradha Gadade": "social_handle",
+    "Anuradha Jadhav": "",
+    "Anushri Arali": "anushri_10_03",
+    "Asha Kumbhar": "",
+    "Ashwat Bijjargi": "ashwat_bijjaragi",
+    "Ashwat Birajadar": "ashvat_birajadar._",
+    "Ashwini Mali": "its_ashvini_07",
+    "Atharv Swami": "atharv_477",
+    "Avdhut Tile": "avdhut_tile_",
+    "Awaij Mujawar": "its_awaij_____m",
+    "Ayesha Makandar": "aaishuu_20",
+    "Bhagyashri Mali": "",
+    "Dhanashri Marathe": "dhanashri_marathe_10",
+    "Dhanashri Shinde": "",
+    "Dhaneshwari Bagali": "__dhanu__1727",
+    "Dhanuja Kolekar": "",
+    "Farahat Halli": "",
+    "Gitanjali Mali": "_gitanjali___02",
+    "Gurubasu Jaygond": "akash_jaygond_45",
+    "Harsh Chendake": "harsh_hm_143",
+    "Harshada Pawar": "harshada_p07",
+    "Harshvardhan Shant": "harshshant1510",
+    "Kajma Makandar": "",
+    "Kavasar Shaikh": "",
+    "Kiran Pawar": "",
+    "Laxman Chaugule": "laxman_oo4_",
+    "Laxman Pujari": "laxmanpujari497",
+    "Madhura Tangadi": "madhu__3125",
+    "Mahantesh Mali": "mahantesh_mali_4545",
+    "Mahesh Algundagi": "mahesh_koli____1478",
+    "Mahesh Karoli": "its_mahi__8055",
+    "Mallikarjun Shegunashi": "mr_mallu002",
+    "Manjunath Teli": "m.a.n.j.u.n.a.t.h_t.e.l.i",
+    "Maruti Chavan": "maruti9197",
+    "Maruti Sargar": "marutisargar007",
+    "Mayuri Sawant": "mayu__805",
+    "Monu Wade": "mr_monu__1432",
+    "Nirjala Bamane": "",
+    "Pahel Nadaf": "________p.s.p________",
+    "Payal Mane": "p____4____payalll",
+    "Payal Walikar": "",
+    "Prajakta Ingavale": "",
+    "Prajakta Mali": "",
+    "Prajwal Khandekar": "",
+    "Pranav Lokare": "pranav_lokare_16",
+    "Praniti Shirke": "mii._.pranitee",
+    "Prasad Swami": "prasad_swami_05",
+    "Prashant Pawar": "pashya_3824",
+    "Prashant Shitole": "prashant_shitole_1406",
+    "Pratik Khandekar": "_1718_pratik ",
+    "Pratik Mali": "pratikm3953",
+    "Pratiksha Mane": "pratiksha_mane_96k",
+    "Priya Sawant": "",
+    "Priyanka Shinde": "",
+    "Radha Yadagond": "",
+    "Rakshita Biradar": "",
+    "Rani Kare": "",
+    "Ritesh Mali": "ritesh_mali514",
+    "Rohini Walekhinde": "rohini_walekhinde",
+    "Rohit Kadam": "rohya_kadam_92",
+    "Rubina Makandar": "rubi_75591",
+    "Rukmini Tile": "ruku_tile_45",
+    "Rutuja Devkate": "",
+    "Sahebrao Devkate": "ssahebrao_devkate_7787",
+    "Sahil Kore": "sahil_kore_18",
+    "Sajid Mulla": "offx.sajid___7",
+    "Sajid Pinjari": "sajid_nadaf_07",
+    "Sakshi Waghmode": "",
+    "Samruddhi Modi": "",
+    "Sana Nadaf": "_itz_sanu._.5125",
+    "Sandeep Sawant": "",
+    "Sanika Chavan": "_96sanika__",
+    "Sanket Khot": "sankuuu_4572",
+    "Satish Doni": "satish_doni_143",
+    "Saundarya Sankpal": "_saundarya_557",
+    "Sauranjali Langote": "swaranjali27112",
+    "Savitri Karajanagi": "",
+    "Shashikant Mali": "shashikant_mali_05",
+    "Shital Patil": "itz_shitu_0203",
+    "Shivam Mali": "shiv_ammali45",
+    "Shivraj Shinde": "shivraj__shinde212",
+    "Shraddha Pore": "shraddhapore_08",
+    "Shridevi Ghejji": "",
+    "Shreya Biradar": "",
+    "Sagar Savant": "official_co_savant8153",
+    "Shubhangi Shinde": "shinde_shubh_17",
+    "Shweta Shant": "",
+    "Sneha Karenavar": "sne.ha__18",
+    "Sneha Kumbhar": "__sne.ha__695",
+    "Sonali Madane": "sonali_madane7",
+    "Sonali Mali": "malisonali_24",
+    "Soumya Karoli": "soumya_karoli",
+    "Sujal Babar": "sujal_sonar11",
+    "Supriya Mane Patil": "",
+    "Sushant Shingade": "mr_sushant_shingade ",
+    "Sushmita Chavan": "its_susmita_chavan",
+    "Tejashri More": "tejashri_more_5007",
+    "Vaishnavi Patil": "",
+    "Vijaylaxmi Jabagond": "",
+    "Vrushali Mane": "vrus.hali0603",
+    "Yash Buva": ""
+};
 
 // DOM Elements
 const introOverlay = document.getElementById('intro-overlay');
 const storyContainer = document.getElementById('story-container');
 const scenesContainer = document.getElementById('scenes');
 const sceneTemplate = document.getElementById('scene-template');
-const progressBar = document.getElementById('progress-bar');
 const finalSection = document.getElementById('final-section');
 const momentsSection = document.getElementById('moments-section');
 const mentorsSection = document.getElementById('mentors-section');
@@ -73,7 +192,7 @@ function createStudentCard(name) {
     card.className = 'student-card';
     const initial = name.charAt(0);
     const photoPath = `students/${name}.jpg`;
-    
+
     card.innerHTML = `
         <div class="card-image">
             <img src="${photoPath}" alt="${name}" loading="lazy" 
@@ -110,7 +229,14 @@ function showStudentProfile(name) {
                     <p>"A journey that started with a hello, ending with beautiful memories forever."</p>
                 </div>
                 <div class="student-social">
-                    <span> Memory Captured</span>
+                    ${studentSocials[name] ? `
+                        <a href="https://instagram.com/${studentSocials[name]}" target="_blank" class="insta-profile-link">
+                            <svg class="insta-icon" viewBox="0 0 24 24">
+                                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.266.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"></path>
+                            </svg>
+                            <span>@${studentSocials[name]}</span>
+                        </a>
+                    ` : `<span>❤️ Memory Captured</span>`}
                 </div>
             </div>
         </div>
@@ -159,7 +285,6 @@ async function showScene(index) {
     const data = storyData[index];
     const textElement = currentScene.querySelector('.story-text');
 
-    updateProgressBar(index, data.duration);
     await typeText(textElement, data.text);
 
     setTimeout(() => {
@@ -175,28 +300,46 @@ function endStory() {
 }
 
 function showSection(sectionId) {
-    // Hide all
-    storyContainer.classList.remove('active');
-    finalSection.classList.remove('active');
-    momentsSection.classList.remove('active');
-    mentorsSection.classList.remove('active');
-    if (messageSection) messageSection.classList.remove('active');
+    // Elegant Cross-fade Transition
+    const sections = [storyContainer, finalSection, momentsSection, mentorsSection, messageSection];
+
+    // Fade out all active sections first
+    sections.forEach(sec => {
+        if (sec) {
+            sec.style.opacity = '0';
+            setTimeout(() => {
+                sec.classList.remove('active');
+                sec.style.display = 'none';
+            }, 400); // Wait for fade out
+        }
+    });
 
     currentSceneIndex = -1;
 
-    if (sectionId === 'story') {
-        storyContainer.classList.add('active');
-        showScene(0);
-    } else if (sectionId === 'students') {
-        finalSection.classList.add('active');
-        setTimeout(animateStats, 500);
-    } else if (sectionId === 'moments') {
-        momentsSection.classList.add('active');
-    } else if (sectionId === 'mentors') {
-        mentorsSection.classList.add('active');
-    } else if (sectionId === 'message-section') {
-        if (messageSection) messageSection.classList.add('active');
-    }
+    setTimeout(() => {
+        let target;
+        if (sectionId === 'story') {
+            target = storyContainer;
+            showScene(0);
+        } else if (sectionId === 'students') {
+            target = finalSection;
+            setTimeout(animateStats, 500);
+        } else if (sectionId === 'moments') {
+            target = momentsSection;
+        } else if (sectionId === 'mentors') {
+            target = mentorsSection;
+        } else if (sectionId === 'message-section') {
+            target = messageSection;
+        }
+
+        if (target) {
+            target.style.display = 'block';
+            // Force reflow for transition
+            target.offsetHeight;
+            target.classList.add('active');
+            target.style.opacity = '1';
+        }
+    }, 500);
 }
 
 function typeText(element, text) {
@@ -217,22 +360,6 @@ function typeText(element, text) {
         }
         type();
     });
-}
-
-function updateProgressBar(index, duration) {
-    const totalScenes = storyData.length;
-    const progressPerScene = 100 / totalScenes;
-    const startProgress = index * progressPerScene;
-    const startTime = performance.now();
-
-    function animate() {
-        const elapsed = performance.now() - startTime;
-        const sceneProgress = Math.min(elapsed / duration, 1);
-        const totalProgress = startProgress + (sceneProgress * progressPerScene);
-        progressBar.style.width = `${totalProgress}%`;
-        if (sceneProgress < 1 && currentSceneIndex === index) requestAnimationFrame(animate);
-    }
-    requestAnimationFrame(animate);
 }
 
 // Cinematic Particle System (Stardust)
@@ -263,7 +390,7 @@ function animateParticles() {
     particlesArray.forEach(p => {
         p.x += p.speedX;
         p.y += p.speedY;
-        
+
         if (p.x < 0) p.x = canvas.width;
         if (p.x > canvas.width) p.x = 0;
         if (p.y < 0) p.y = canvas.height;
@@ -322,7 +449,7 @@ function showMomentDetail(element) {
 function updateMomentModal() {
     const moment = allMoments[currentMomentIndex];
     const modal = document.getElementById('momentModal');
-    
+
     // Add fade-out/in effect
     const content = modal.querySelector('.moment-detail-view');
     content.style.opacity = '0';
@@ -333,7 +460,7 @@ function updateMomentModal() {
         document.getElementById('detail-date').textContent = moment.date;
         document.getElementById('detail-title').textContent = moment.title;
         document.getElementById('detail-desc').textContent = moment.desc;
-        
+
         content.style.opacity = '1';
         content.style.transform = 'scale(1)';
     }, 200);
@@ -357,13 +484,13 @@ function initMomentTilt() {
             const { left, top, width, height } = item.getBoundingClientRect();
             const x = (e.clientX - left) / width - 0.5;
             const y = (e.clientY - top) / height - 0.5;
-            
+
             const tiltX = y * 10; // Max tilt 10deg
             const tiltY = -x * 10;
-            
+
             item.style.transform = `perspective(1000px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) scale(0.98)`;
         });
-        
+
         item.addEventListener('mouseleave', () => {
             item.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)`;
         });
@@ -430,14 +557,14 @@ document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
         const momentsModal = document.getElementById('momentModal');
         if (momentsModal && momentsModal.style.display === 'flex') closeMomentModal();
-        
+
         const results = document.getElementById('searchResults');
         if (results) results.style.display = 'none';
-        
+
         const searchInput = document.getElementById('studentSearch');
         if (searchInput) searchInput.value = '';
     }
-    
+
     // Gallery Navigation
     const momentsModal = document.getElementById('momentModal');
     if (momentsModal && momentsModal.style.display === 'flex') {
@@ -450,10 +577,10 @@ function createMagicLetter() {
     const quote = floatingQuotes[Math.floor(Math.random() * floatingQuotes.length)];
     const container = document.createElement('div');
     container.className = 'envelope-container';
-    
+
     // Random horizontal position, but keep it within screen bounds
-    container.style.left = Math.random() * 60 + 20 + '%'; 
-    
+    container.style.left = Math.random() * 60 + 20 + '%';
+
     container.innerHTML = `
         <div class="envelope">
             <div class="letter-paper">
@@ -461,14 +588,14 @@ function createMagicLetter() {
             </div>
         </div>
     `;
-    
+
     document.body.appendChild(container);
-    
+
     // Trigger the "opening" after it starts floating
     setTimeout(() => {
         container.classList.add('active');
     }, 2000);
-    
+
     // Remove after it floats off screen
     setTimeout(() => container.remove(), 10000);
 }
@@ -479,25 +606,27 @@ function endJourneyFlurry() {
     if (audio) {
         audio.pause(); // Stop playlist
     }
-    
+
     const finaleAudio = new Audio('phirse.mp3');
     finaleAudio.volume = 0.8;
     finaleAudio.play().catch(e => {
         console.log("Finale music blocked:", e);
-        // Fallback: Try to play it again after user interaction if possible
     });
+
+    // START THE BLOOM!
+    triggerBloom();
 
     let count = 0;
     const maxLetters = 5; // Reduced to 5 as requested
-    
+
     // First immediate letter
     setTimeout(createMagicLetter, 500);
     count++;
-    
+
     const letterInterval = setInterval(() => {
         if (count >= maxLetters) {
             clearInterval(letterInterval);
-            
+
             // Final transition after letters finish
             setTimeout(() => {
                 showSection('message-section');
@@ -507,7 +636,7 @@ function endJourneyFlurry() {
         }
         createMagicLetter();
         count++;
-    }, 4500); 
+    }, 4500);
 }
 
 const playlist = [
@@ -521,10 +650,18 @@ let currentTrackIndex = 0;
 function toggleMusic() {
     const audio = document.getElementById('bg-audio');
     const btn = document.getElementById('music-toggle');
-    
+    const circle = document.querySelector('.progress-ring__circle');
+    const circumference = 2 * Math.PI * 28;
+
     if (!audio) return;
 
-    // Initialize playlist listener if not already there
+    // Update Progress Ring
+    audio.ontimeupdate = () => {
+        const offset = circumference - (audio.currentTime / audio.duration) * circumference;
+        if (circle) circle.style.strokeDashoffset = offset;
+    };
+
+    // Initialize playlist listener
     if (!audio.hasAttribute('data-limit-set')) {
         audio.setAttribute('data-limit-set', 'true');
         audio.addEventListener('ended', () => {
@@ -532,7 +669,7 @@ function toggleMusic() {
             if (currentTrackIndex < playlist.length) {
                 audio.src = playlist[currentTrackIndex];
                 audio.load();
-                audio.play().catch(console.error);
+                audio.play();
                 btn.classList.remove('muted');
             } else {
                 audio.pause();
@@ -542,13 +679,11 @@ function toggleMusic() {
     }
 
     if (audio.paused) {
-        // Only play if we haven't finished the playlist
         if (currentTrackIndex < playlist.length) {
-            // If src is empty (first time), set it
             if (!audio.src || audio.src === "") {
                 audio.src = playlist[currentTrackIndex];
             }
-            audio.play().catch(e => console.log("Manual play failed:", e));
+            audio.play();
             btn.classList.remove('muted');
         }
     } else {
@@ -565,7 +700,7 @@ if (cursor && follower) {
     document.addEventListener('mousemove', (e) => {
         cursor.style.left = e.clientX + 'px';
         cursor.style.top = e.clientY + 'px';
-        
+
         // Follower with slight lag
         setTimeout(() => {
             follower.style.left = e.clientX + 'px';
@@ -578,7 +713,6 @@ if (cursor && follower) {
 window.addEventListener('resize', initParticles);
 initParticles();
 animateParticles();
-init();
 
 // ELITE FINALE LOGIC
 // 1. Scroll Progress & Reveal Observer
@@ -598,7 +732,7 @@ function updateScrollProgress() {
     const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
     const scrolled = (winScroll / height) * 100;
     if (scrollProgress) scrollProgress.style.width = scrolled + "%";
-    
+
     // Auto-reveal elements on scroll
     document.querySelectorAll('.moment-item, .stat-card, .mentor-card, .signature-name').forEach(el => {
         revealObserver.observe(el);
@@ -619,28 +753,18 @@ if (signatureWall) {
     });
 }
 
-// 3. Audio Pulse Visualizer
-function addMusicPulse() {
-    const musicBtn = document.getElementById('music-toggle');
-    if (musicBtn && !musicBtn.querySelector('.music-pulse')) {
-        const pulse = document.createElement('div');
-        pulse.className = 'music-pulse';
-        musicBtn.appendChild(pulse);
-    }
-}
-
 function createFloatingMessage() {
     const quote = floatingQuotes[Math.floor(Math.random() * floatingQuotes.length)];
     const msg = document.createElement('div');
     msg.className = 'floating-message';
     msg.textContent = quote;
-    
+
     // Random position
     msg.style.left = Math.random() * 80 + 10 + '%';
     msg.style.top = Math.random() * 80 + 10 + '%';
-    
+
     document.body.appendChild(msg);
-    
+
     // Remove after animation
     setTimeout(() => msg.remove(), 15000);
 }
@@ -652,8 +776,107 @@ function initFloatingMessages() {
 
 // Update startStory to include floating messages
 const originalStartStory = startStory;
-startStory = function() {
+startStory = function () {
     originalStartStory();
-    addMusicPulse();
     initFloatingMessages();
 };
+
+// ==========================================
+// ELITE UPGRADES: CONFETTI
+// ==========================================
+
+// 1. CONFETTI BLOOM SYSTEM
+function triggerBloom() {
+    const canvas = document.createElement('canvas');
+    canvas.id = 'confetti-canvas';
+    document.body.appendChild(canvas);
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const particles = [];
+    const colors = ['#ffab00', '#ffffff', '#ffd700', '#ff8f00'];
+
+    for (let i = 0; i < 200; i++) {
+        particles.push({
+            x: Math.random() * canvas.width,
+            y: canvas.height + Math.random() * 100,
+            vx: (Math.random() - 0.5) * 10,
+            vy: -Math.random() * 20 - 10,
+            size: Math.random() * 8 + 4,
+            color: colors[Math.floor(Math.random() * colors.length)],
+            rotation: Math.random() * 360,
+            rotationSpeed: (Math.random() - 0.5) * 10
+        });
+    }
+
+    function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        particles.forEach((p, i) => {
+            p.x += p.vx;
+            p.y += p.vy;
+            p.vy += 0.5; // Gravity
+            p.rotation += p.rotationSpeed;
+
+            ctx.save();
+            ctx.translate(p.x, p.y);
+            ctx.rotate(p.rotation * Math.PI / 180);
+            ctx.fillStyle = p.color;
+            ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size);
+            ctx.restore();
+
+            if (p.y > canvas.height + 100) particles.splice(i, 1);
+        });
+
+        if (particles.length > 0) {
+            requestAnimationFrame(animate);
+        } else {
+            canvas.remove();
+        }
+    }
+    animate();
+}
+
+// 3. MAGNETIC BUTTONS & SIGNATURE REVEAL
+function initEliteInteractions() {
+    // Magnetic Effect
+    const magneticElements = document.querySelectorAll('.replay-btn, .music-btn, .insta-link');
+
+    document.addEventListener('mousemove', (e) => {
+        magneticElements.forEach(el => {
+            const rect = el.getBoundingClientRect();
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
+
+            const distanceX = e.clientX - centerX;
+            const distanceY = e.clientY - centerY;
+            const distance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
+
+            if (distance < 100) {
+                const moveX = distanceX * 0.3;
+                const moveY = distanceY * 0.3;
+                el.style.transform = `translate(${moveX}px, ${moveY}px) scale(1.1)`;
+                el.style.boxShadow = `0 15px 40px rgba(255,171,0,0.4)`;
+            } else {
+                el.style.transform = `translate(0, 0) scale(1)`;
+                el.style.boxShadow = `none`;
+            }
+        });
+    });
+
+    // Staggered Signature Reveal
+    const signatures = document.querySelectorAll('.signature-name');
+    signatures.forEach((sig, index) => {
+        sig.style.transitionDelay = `${(index % 15) * 0.05}s`;
+    });
+}
+
+// Update initialization
+const finalPolishInit = init;
+init = function () {
+    finalPolishInit();
+    initEliteInteractions();
+};
+
+// Start the whole application
+init();
