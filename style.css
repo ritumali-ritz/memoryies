@@ -1069,54 +1069,71 @@ body {
     width: 100%;
 }
 
-/* Grid for Mentors */
+/* Flip Card Grid */
 .mentors-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
-    gap: 60px;
-    margin-top: 3rem;
-    justify-items: center;
+    grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+    gap: 40px;
+    margin-top: 4rem;
+    padding: 0 40px;
 }
 
-.mentor-card {
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 20px;
-    padding: 4rem 3rem;
-    text-align: center;
-    transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+.mentor-card-container {
     perspective: 1500px;
+    height: 700px;
+    width: 100%;
+    max-width: 500px;
 }
 
-.mentor-card:hover {
-    border-color: #fff;
-    transform: translateY(-20px) rotateX(5deg);
-    background: rgba(255, 255, 255, 0.08);
-    box-shadow: 0 40px 80px rgba(0, 0, 0, 0.8), 0 0 20px rgba(255, 255, 255, 0.05);
+.mentor-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transform-style: preserve-3d;
+    cursor: pointer;
+}
+
+.mentor-card-container:hover .mentor-card-inner {
+    transform: rotateY(180deg);
+}
+
+.mentor-card-front, .mentor-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 3rem;
+    backdrop-filter: blur(10px);
+}
+
+.mentor-card-back {
+    transform: rotateY(180deg);
+    background: linear-gradient(135deg, rgba(var(--accent-glow-rgb), 0.1) 0%, rgba(0, 0, 0, 0.8) 100%);
+    border-color: var(--accent-glow);
+    text-align: center;
 }
 
 .mentor-photo {
-    width: 500px;
-    /* Cinematic scale */
-    height: 500px;
-    margin: 0 auto 3rem;
+    width: 350px;
+    height: 350px;
+    margin-bottom: 2rem;
     border-radius: 50%;
     overflow: hidden;
-    /* Clean fill */
-    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    background: #000;
-}
-
-.mentor-card:hover .mentor-photo {
-    border-color: #fff;
+    border: 2px solid rgba(255, 255, 255, 0.1);
 }
 
 .mentor-photo img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    /* This makes sure the png/jpg fills the circle completely */
-    display: block;
 }
 
 .mentor-title {
@@ -1124,12 +1141,61 @@ body {
     color: var(--accent-glow);
     letter-spacing: 0.3rem;
     text-transform: uppercase;
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
 }
 
 .mentor-name {
     font-family: var(--font-heading);
     font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+}
+
+.flip-hint {
+    font-size: 0.7rem;
+    opacity: 0.4;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 1rem;
+}
+
+.marathi-message {
+    font-size: 1.3rem;
+    line-height: 1.8;
+    color: #fff;
+}
+
+.marathi-message strong {
+    color: var(--accent-glow);
+    display: block;
+    margin-bottom: 1rem;
+}
+
+.quote-icon {
+    font-size: 5rem;
+    color: var(--accent-glow);
+    opacity: 0.2;
+    margin-bottom: -1rem;
+    font-family: serif;
+}
+
+@media (max-width: 768px) {
+    .mentors-grid {
+        grid-template-columns: 1fr;
+        padding: 0 20px;
+    }
+    
+    .mentor-card-container {
+        height: 550px;
+    }
+    
+    .mentor-photo {
+        width: 250px;
+        height: 250px;
+    }
+    
+    .marathi-message {
+        font-size: 1.1rem;
+    }
 }
 
 .final-quote-section {
