@@ -460,10 +460,46 @@ body {
     filter: grayscale(100%) sepia(30%) brightness(0.7);
 }
 
-.moment-image-container img {
+.moment-image-container img,
+.moment-image-container video {
     width: 100%;
     height: 100%;
     object-fit: cover;
+}
+
+.moment-video-preview {
+    pointer-events: none;
+}
+
+.video-play-indicator {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60px;
+    height: 60px;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(5px);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0.8;
+    transition: all 0.3s ease;
+    z-index: 5;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.video-play-indicator svg {
+    width: 30px;
+    height: 30px;
+    fill: #fff;
+}
+
+.moment-item:hover .video-play-indicator {
+    transform: translate(-50%, -50%) scale(1.1);
+    background: rgba(255, 255, 255, 0.4);
+    opacity: 1;
 }
 
 .moment-item:hover .moment-image-container {

@@ -431,8 +431,14 @@ function showMomentDetail(element) {
     // Populate allMoments if empty
     if (allMoments.length === 0) {
         document.querySelectorAll('.moment-item').forEach((item, index) => {
+            const img = item.querySelector('img');
+            const video = item.querySelector('video');
+            const source = img ? img.src : video.querySelector('source').src;
+            const isVideo = !!video;
+
             allMoments.push({
-                img: item.querySelector('img').src,
+                src: source,
+                isVideo: isVideo,
                 date: item.querySelector('.moment-date').textContent,
                 title: item.querySelector('h3').textContent,
                 desc: item.querySelector('p').textContent,
@@ -442,8 +448,10 @@ function showMomentDetail(element) {
     }
 
     // Find current index
-    const clickedImg = element.querySelector('img').src;
-    currentMomentIndex = allMoments.findIndex(m => m.img === clickedImg);
+    const img = element.querySelector('img');
+    const video = element.querySelector('video');
+    const clickedSrc = img ? img.src : video.querySelector('source').src;
+    currentMomentIndex = allMoments.findIndex(m => m.src === clickedSrc);
 
     updateMomentModal();
     document.getElementById('momentModal').style.display = 'flex';
@@ -452,14 +460,36 @@ function showMomentDetail(element) {
 function updateMomentModal() {
     const moment = allMoments[currentMomentIndex];
     const modal = document.getElementById('momentModal');
+    const detailImg = document.getElementById('detail-img');
+    const detailVideo = document.getElementById('detail-video');
 
     // Add fade-out/in effect
     const content = modal.querySelector('.moment-detail-view');
     content.style.opacity = '0';
     content.style.transform = 'scale(0.95)';
 
+    // Stop and hide video by default
+    detailVideo.pause();
+    detailVideo.style.display = 'none';
+    detailImg.style.display = 'none';
+
     setTimeout(() => {
-        document.getElementById('detail-img').src = moment.img;
+        if (moment.isVideo) {
+            detailVideo.src = moment.src;
+            detailVideo.style.display = 'block';
+            detailVideo.load();
+            
+            // Optional: Auto-pause background music when video plays
+            const bgAudio = document.getElementById('bg-audio');
+            if (bgAudio && !bgAudio.paused) {
+                bgAudio.pause();
+                document.getElementById('music-toggle').classList.add('muted');
+            }
+        } else {
+            detailImg.src = moment.src;
+            detailImg.style.display = 'block';
+        }
+
         document.getElementById('detail-date').textContent = moment.date;
         document.getElementById('detail-title').textContent = moment.title;
         document.getElementById('detail-desc').textContent = moment.desc;
@@ -477,18 +507,20 @@ function navMoment(step) {
 }
 
 function closeMomentModal() {
+    const detailVideo = document.getElementById('detail-video');
+    if (detailVideo) detailVideo.pause();
     document.getElementById('momentModal').style.display = 'none';
 }
 
-// 3D Tilt Effect
-function initMomentTilt() {
+function initMomentInteractions() {
     document.querySelectorAll('.moment-item').forEach(item => {
+        // 3D Tilt Effect
         item.addEventListener('mousemove', e => {
             const { left, top, width, height } = item.getBoundingClientRect();
             const x = (e.clientX - left) / width - 0.5;
             const y = (e.clientY - top) / height - 0.5;
 
-            const tiltX = y * 10; // Max tilt 10deg
+            const tiltX = y * 10;
             const tiltY = -x * 10;
 
             item.style.transform = `perspective(1000px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) scale(0.98)`;
@@ -496,10 +528,24 @@ function initMomentTilt() {
 
         item.addEventListener('mouseleave', () => {
             item.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)`;
+            // Pause video on leave if it's a video moment
+            const video = item.querySelector('video');
+            if (video) {
+                video.pause();
+                video.currentTime = 0;
+            }
         });
+
+        // Hover to play video
+        const video = item.querySelector('video');
+        if (video) {
+            item.addEventListener('mouseenter', () => {
+                video.play().catch(e => console.log("Video preview play blocked"));
+            });
+        }
     });
 }
-window.addEventListener('load', initMomentTilt);
+window.addEventListener('load', initMomentInteractions);
 
 function hideModal() {
     document.getElementById('infoModal').style.display = 'none';
